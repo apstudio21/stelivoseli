@@ -1,0 +1,6 @@
+/* Без JS: показуємо все одразу */
+.line__in, .hero__row, .hero__top, .hero__meta { transform: none !important; opacity: 1 !important; }
+.hero__frame { clip-path: none !important; }
+.header__bar::after { transform: none !important; }
+.map__outline, .map__inner { stroke-dashoffset: 0 !important; }
+.map__crest { opacity: 1 !important; transform: none !important; }

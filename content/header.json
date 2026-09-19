@@ -1,0 +1,32 @@
+{
+  "nav": [
+    {
+      "label": "Чому ми?",
+      "href": "#about"
+    },
+    {
+      "label": "Рішення",
+      "href": "#solutions"
+    },
+    {
+      "label": "Проєкти",
+      "href": "#projects"
+    },
+    {
+      "label": "Вартість",
+      "href": "#price"
+    },
+    {
+      "label": "Процес",
+      "href": "#process"
+    },
+    {
+      "label": "Контакти",
+      "href": "#contact"
+    }
+  ],
+  "phone_label": "+38 (067) 000-00-00",
+  "phone_tel": "+380670000000",
+  "schedule": "Пн–Сб, 9:00–19:00",
+  "cta": "Замір"
+}

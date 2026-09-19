@@ -1,0 +1,258 @@
+backend:
+  name: git-gateway
+  branch: main
+
+locale: uk
+media_folder: "images/uploads"
+public_folder: "images/uploads"
+
+collections:
+  - name: "site"
+    label: "Сайт"
+    files:
+      - name: "header"
+        label: "Шапка"
+        file: "content/header.json"
+        fields:
+          - label: "Меню"
+            name: "nav"
+            widget: "list"
+            fields:
+              - { label: "Назва", name: "label", widget: "string" }
+              - { label: "Якір (напр. #projects)", name: "href", widget: "string", pattern: ['^#[a-z0-9-]+$', "Має починатися з # і містити лише латиницю"] }
+          - { label: "Телефон (як показувати)", name: "phone_label", widget: "string" }
+          - { label: "Телефон (для дзвінка, +380...)", name: "phone_tel", widget: "string", pattern: ['^\+380\d{9}$', "Формат: +380XXXXXXXXX"] }
+          - { label: "Графік", name: "schedule", widget: "string" }
+          - { label: "Текст кнопки", name: "cta", widget: "string" }
+
+      - name: "hero"
+        label: "Перший екран"
+        file: "content/hero.json"
+        fields:
+          - { label: "Тег 1 (ціна)", name: "tag1", widget: "string" }
+          - { label: "Тег 2", name: "tag2", widget: "string" }
+          - { label: "Примітка з блискавкою", name: "note", widget: "string" }
+          - { label: "Заголовок — рядок 1", name: "title_line1", widget: "string" }
+          - { label: "Заголовок — рядок 2", name: "title_line2", widget: "string" }
+          - { label: "Заголовок — рядок 3", name: "title_line3", widget: "string" }
+          - { label: "Текст", name: "text", widget: "text" }
+          - { label: "Головна кнопка", name: "cta_primary", widget: "string" }
+          - { label: "Друга кнопка", name: "cta_secondary", widget: "string" }
+          - label: "Слайди (фото + підписи)"
+            name: "slides"
+            widget: "list"
+            min: 1
+            max: 6
+            summary: "{{fields.image_alt}}"
+            fields:
+              - { label: "Фото (горизонтальне, від 1920 px)", name: "image", widget: "image" }
+              - { label: "Опис фото (alt)", name: "image_alt", widget: "string" }
+              - label: "Підписи на фото (до 4)"
+                name: "meta"
+                widget: "list"
+                max: 4
+                fields:
+                  - { label: "Назва", name: "k", widget: "string" }
+                  - { label: "Значення", name: "v", widget: "string" }
+
+      - name: "about"
+        label: "Про компанію"
+        file: "content/about.json"
+        fields:
+          - { label: "Мітка", name: "label", widget: "string" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст — колонка 1", name: "text1", widget: "text" }
+          - { label: "Текст — колонка 2", name: "text2", widget: "text" }
+          - label: "Цифри (4 шт.)"
+            name: "stats"
+            widget: "list"
+            min: 4
+            max: 4
+            fields:
+              - { label: "Число", name: "value", widget: "number", value_type: "int", min: 1 }
+              - { label: "Знак після числа (напр. +)", name: "suffix", widget: "string", required: false }
+              - { label: "Підпис", name: "label", widget: "string" }
+
+      - name: "solutions"
+        label: "Рішення"
+        file: "content/solutions.json"
+        fields:
+          - { label: "Мітка", name: "label", widget: "string" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "text", widget: "text" }
+          - { label: "Текст посилання в рядку", name: "cta", widget: "string" }
+          - label: "Рішення"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title_line1}} {{fields.title_line2}}"
+            fields:
+              - { label: "Назва — рядок 1", name: "title_line1", widget: "string" }
+              - { label: "Назва — рядок 2", name: "title_line2", widget: "string", required: false }
+              - { label: "Опис", name: "text", widget: "text" }
+              - { label: "Ціна (напр. від 750 грн/м²)", name: "price", widget: "string" }
+              - { label: "Термін", name: "term", widget: "string" }
+              - { label: "Фото (вертикальне 4:5)", name: "image", widget: "image" }
+              - { label: "Опис фото (alt)", name: "image_alt", widget: "string" }
+
+      - name: "projects"
+        label: "Проєкти"
+        file: "content/projects.json"
+        fields:
+          - { label: "Мітка", name: "label", widget: "string" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "text", widget: "text" }
+          - { label: "Текст під сіткою", name: "more", widget: "text" }
+          - { label: "Кнопка", name: "cta", widget: "string" }
+          - label: "Обʼєкти (краще 4)"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Назва", name: "title", widget: "string" }
+              - { label: "Місце", name: "place", widget: "string" }
+              - { label: "Площа", name: "area", widget: "string" }
+              - { label: "Рік", name: "year", widget: "string" }
+              - { label: "Рішення", name: "solution", widget: "string" }
+              - { label: "Ціна під ключ", name: "price", widget: "string" }
+              - { label: "Фото (горизонтальне, від 1400 px)", name: "image", widget: "image" }
+              - { label: "Опис фото (alt)", name: "image_alt", widget: "string" }
+
+      - name: "calc"
+        label: "Калькулятор"
+        file: "content/calc.json"
+        fields:
+          - { label: "Мітка", name: "label", widget: "string" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "text", widget: "text" }
+          - label: "Полотна (4 шт., ціна за м² під ключ)"
+            name: "fabrics"
+            widget: "list"
+            min: 4
+            max: 4
+            fields:
+              - { label: "Назва", name: "name", widget: "string" }
+              - { label: "Ціна, грн/м²", name: "price", widget: "number", value_type: "int", min: 0 }
+          - label: "Профілі (3 шт., доплата за м²)"
+            name: "profiles"
+            widget: "list"
+            min: 3
+            max: 3
+            fields:
+              - { label: "Назва", name: "name", widget: "string" }
+              - { label: "Доплата, грн/м² (0 = у базовій ціні)", name: "price", widget: "number", value_type: "int", min: 0 }
+          - label: "Світло (4 шт.)"
+            name: "lights"
+            widget: "list"
+            min: 4
+            max: 4
+            fields:
+              - { label: "Назва", name: "name", widget: "string" }
+              - { label: "Одиниця (шт / м.п.)", name: "unit", widget: "string" }
+              - { label: "Ціна за одиницю, грн", name: "price", widget: "number", value_type: "int", min: 0 }
+          - { label: "Кнопка", name: "cta", widget: "string" }
+          - { label: "Примітка під кнопкою", name: "note", widget: "text" }
+
+      - name: "process"
+        label: "Процес"
+        file: "content/process.json"
+        fields:
+          - { label: "Мітка", name: "label", widget: "string" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "text", widget: "text" }
+          - label: "Кроки (3–6)"
+            name: "steps"
+            widget: "list"
+            min: 3
+            max: 6
+            summary: "{{fields.title}}"
+            fields:
+              - { label: "Назва", name: "title", widget: "string" }
+              - { label: "Опис", name: "text", widget: "text" }
+              - { label: "Тег (термін / умова)", name: "tag", widget: "string", required: false }
+
+      - name: "trust"
+        label: "Матеріали й гарантія"
+        file: "content/trust.json"
+        fields:
+          - { label: "Мітка", name: "label", widget: "string" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "text", widget: "text" }
+          - label: "Факти (4 шт.)"
+            name: "items"
+            widget: "list"
+            min: 4
+            max: 4
+            summary: "{{fields.question}}"
+            fields:
+              - { label: "Питання клієнта", name: "question", widget: "string" }
+              - { label: "Коротка відповідь (велика)", name: "claim", widget: "string" }
+              - { label: "Пояснення", name: "text", widget: "text" }
+          - { label: "Гарантія — мітка", name: "g_label", widget: "string" }
+          - { label: "Гарантія — число", name: "g_value", widget: "number", value_type: "int", min: 1 }
+          - { label: "Гарантія — одиниця", name: "g_unit", widget: "string" }
+          - { label: "Гарантія — текст", name: "g_text", widget: "text" }
+          - { label: "Гарантія — кнопка", name: "g_cta", widget: "string" }
+
+      - name: "reviews"
+        label: "Відгуки"
+        file: "content/reviews.json"
+        fields:
+          - { label: "Мітка", name: "label", widget: "string" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "text", widget: "text" }
+          - label: "Відгуки (3–6)"
+            name: "items"
+            widget: "list"
+            min: 3
+            max: 6
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "Текст відгуку (до 250 знаків)", name: "text", widget: "text" }
+              - { label: "Імʼя", name: "name", widget: "string" }
+              - { label: "Обʼєкт · рішення", name: "object", widget: "string" }
+              - { label: "Дата", name: "date", widget: "string" }
+          - { label: "Оцінка", name: "rate", widget: "string" }
+          - { label: "Підпис до оцінки", name: "rate_text", widget: "string" }
+          - { label: "Кнопка", name: "cta", widget: "string" }
+          - { label: "Посилання на відгуки (Google Maps)", name: "cta_url", widget: "string", pattern: ['^https://', "Має починатися з https://"] }
+
+      - name: "faq"
+        label: "Питання (FAQ)"
+        file: "content/faq.json"
+        fields:
+          - { label: "Мітка", name: "label", widget: "string" }
+          - { label: "Заголовок", name: "title", widget: "string" }
+          - { label: "Текст", name: "text", widget: "text" }
+          - { label: "Посилання на Telegram (https://t.me/...)", name: "telegram", widget: "string", pattern: ['^https://t\.me/', "Має починатися з https://t.me/"] }
+          - { label: "Номер для Viber (+380...)", name: "viber_phone", widget: "string", pattern: ['^\+380\d{9}$', "Формат: +380XXXXXXXXX"] }
+          - label: "Питання (до 10)"
+            name: "items"
+            widget: "list"
+            max: 10
+            summary: "{{fields.q}}"
+            fields:
+              - { label: "Питання", name: "q", widget: "string" }
+              - { label: "Відповідь", name: "a", widget: "text" }
+
+      - name: "contact"
+        label: "Заявка на замір"
+        file: "content/contact.json"
+        fields:
+          - { label: "Мітка", name: "label", widget: "string" }
+          - { label: "Заголовок — рядок 1", name: "title_line1", widget: "string" }
+          - { label: "Заголовок — рядок 2 (акцентний)", name: "title_line2", widget: "string" }
+          - { label: "Текст", name: "text", widget: "text" }
+          - { label: "Де працюємо", name: "area", widget: "string" }
+          - { label: "Кнопка", name: "cta", widget: "string" }
+          - { label: "Примітка під кнопкою", name: "note", widget: "text" }
+
+      - name: "footer"
+        label: "Футер і контакти"
+        file: "content/footer.json"
+        fields:
+          - { label: "Короткий опис", name: "tagline", widget: "string" }
+          - { label: "Email", name: "email", widget: "string", pattern: ['^[^@\s]+@[^@\s]+\.[^@\s]+$', "Некоректний email"] }
+          - { label: "Адреса", name: "address", widget: "string" }
+          - { label: "Instagram (https://...)", name: "instagram", widget: "string", pattern: ['^https://', "Має починатися з https://"] }
+          - { label: "Facebook (https://...)", name: "facebook", widget: "string", pattern: ['^https://', "Має починатися з https://"] }
+          - { label: "Telegram (https://t.me/...)", name: "telegram", widget: "string", pattern: ['^https://t\.me/', "Має починатися з https://t.me/"] }
