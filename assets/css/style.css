@@ -84,23 +84,31 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .btn__dot {
   width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: none;
 }
-/* заливка росте з точки */
+/* заливка росте з точки: коло з центром у точці, діаметр — дві ширини кнопки, тож покриває кнопку будь-якої ширини */
 .btn::before {
   content: ""; position: absolute; z-index: -1;
-  right: 16px; top: 50%; width: 6px; height: 6px; border-radius: 50%;
+  right: 19px; top: 50%; width: calc(200% + 48px); aspect-ratio: 1; border-radius: 50%;
   background: var(--ink);
-  transform: translateY(-50%) scale(0);
-  transition: transform .6s var(--ease);
+  transform: translate(50%, -50%) scale(0);
+  transition: transform .75s var(--ease);
 }
-.btn:hover, .btn:focus-visible { color: var(--bg); }
-.btn:hover::before, .btn:focus-visible::before { transform: translateY(-50%) scale(90); }
-
 .btn--dark { background: var(--ink); color: var(--bg); }
 .btn--dark::before { background: var(--bg); }
-.btn--dark:hover, .btn--dark:focus-visible { color: var(--ink); }
+
+/* hover — лише там, де є справжній курсор: на тачі він «залипає» після тапу */
+@media (hover: hover) {
+  .btn:hover { color: var(--bg); }
+  .btn:hover::before { transform: translate(50%, -50%) scale(1); }
+  .btn--dark:hover { color: var(--ink); }
+}
+.btn:focus-visible { color: var(--bg); }
+.btn:focus-visible::before { transform: translate(50%, -50%) scale(1); }
+.btn--dark:focus-visible { color: var(--ink); }
+/* на тачі — короткий відгук на натискання */
+.btn:active { opacity: .85; }
 
 .btn--sm { min-height: 36px; padding: 0 12px 0 16px; gap: 12px; font-size: 11px; }
-.btn--sm::before { right: 12px; }
+.btn--sm::before { right: 15px; }
 
 /* ==========================================================
    HEADER
@@ -639,9 +647,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 .btn--light { background: var(--on-dark); color: var(--ink); border-color: var(--on-dark); }
 .btn--light::before { background: var(--accent); }
-.btn--light:hover, .btn--light:focus-visible { color: var(--on-dark); }
+@media (hover: hover) { .btn--light:hover { color: var(--on-dark); } }
+.btn--light:focus-visible { color: var(--on-dark); }
 .btn--wide { width: 100%; min-height: 52px; }
-.btn--wide:hover::before, .btn--wide:focus-visible::before { transform: translateY(-50%) scale(260); transition-duration: .9s; }
 .btn[disabled] { opacity: .6; pointer-events: none; }
 
 @media (min-width: 768px) {
